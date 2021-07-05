@@ -1,26 +1,28 @@
-﻿class Weapon
-{
-    public int Damage;
-    public int Bullets;
+﻿using System;
 
-    public void Fire(Player player)
+namespace PlayerDetectionSystem
+{
+    public class Weapon
     {
-        player.Health -= Damage;
-        Bullets -= 1;
-    }
-}
+        public int Damage { get; private set; }
+        public int Bullets { get; private set; }
 
-class Player
-{
-    public int Health;
-}
+        public Weapon(int damage, int bullets)
+        {
+            if (damage < 0)
+                throw new ArgumentOutOfRangeException(nameof(damage));
+            
+            if (bullets < 0)
+                throw new ArgumentOutOfRangeException(nameof(bullets));
+            
+            Damage = damage;
+            Bullets = bullets;
+        }
 
-class Bot
-{
-    public Weapon Weapon;
-
-    public void OnSeePlayer(Player player)
-    {
-        Weapon.Fire(player);
+        public void Fire(IDamageable damageable)
+        {
+            damageable.TakeDamage(Damage);
+            Bullets -= 1;
+        }
     }
 }
