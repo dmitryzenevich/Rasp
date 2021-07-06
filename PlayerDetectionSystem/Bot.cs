@@ -4,7 +4,7 @@ namespace PlayerDetectionSystem
 {
     public class Bot
     {
-        public Weapon Weapon { get; private set; }
+        public Weapon Weapon { get; }
 
         public Bot(Weapon weapon)
         {

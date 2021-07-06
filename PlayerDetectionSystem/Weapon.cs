@@ -11,18 +11,21 @@ namespace PlayerDetectionSystem
         {
             if (damage < 0)
                 throw new ArgumentOutOfRangeException(nameof(damage));
-            
+
             if (bullets < 0)
                 throw new ArgumentOutOfRangeException(nameof(bullets));
-            
+
             Damage = damage;
             Bullets = bullets;
         }
 
         public void Fire(IDamageable damageable)
         {
-            damageable.TakeDamage(Damage);
-            Bullets -= 1;
+            if (Bullets > 0)
+            {
+                damageable.TakeDamage(Damage);
+                Bullets -= 1;
+            }
         }
     }
 }

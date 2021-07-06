@@ -4,19 +4,13 @@ namespace PlayerDetectionSystem
 {
     public class Player : IDamageable
     {
-        public Health Health { get; private set; }
+        private Health Health { get; }
 
         public Player(Health health)
         {
             Health = health ?? throw new ArgumentNullException(nameof(health));
         }
 
-        public void TakeDamage(int damage)
-        {
-            if (damage < 0)
-                throw new ArgumentOutOfRangeException(nameof(damage));
-            
-            Health.TakeDamage(damage);
-        }
+        public void TakeDamage(int damage) => Health.TakeDamage(damage);
     }
 }
